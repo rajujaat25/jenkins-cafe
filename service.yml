@@ -5,10 +5,11 @@ metadata:
   labels:
     env: svc
 spec:
-  type: NodePort
   selector:
     name: pod
   ports:
-  - targetPort: 80
+  - name: http
     port: 80
-    nodePort: 30008    
+    protocol: TCP
+    targetPort: 8085
+  type: LoadBalancer
