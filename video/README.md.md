@@ -88,11 +88,11 @@ Now you have Jenkins, Docker, AWS CLI, eksctl, and kubectl installed and configu
 
 1\. #cat /var/lib/jenkins/.kube/config
 
-1\. Create Credentials: In Jenkins, go to Credentials, click on Add Credentials, and choose Kubernetes
+2\. Create Credentials: In Jenkins, go to Credentials, click on Add Credentials, and choose Kubernetes
 
 configuration. You can either use a secret file or enter the content directly.
 
-2\. Verify Connection: Switch to the Jenkins user:
+3\. Verify Connection: Switch to the Jenkins user:
 
 1\. #sudo su - jenkins
 
