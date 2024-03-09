@@ -106,3 +106,185 @@ Create a New Pipeline Job: In Jenkins, create a new pipeline job to define your 
 
 use the provided example pipeline code and customize it according to your requirements.
 
+1\. pipeline {
+
+2\.
+
+3\.
+
+4\.
+
+agent any
+
+environment {
+
+DOCKER\_PASSWORD = credentials('Docker-Password') // Assuming you've added Docker Hub
+
+password as a secret text credential with ID 'dockerhub-password'
+
+}
+
+5\.
+
+6\.
+
+7\.
+
+8\.
+
+triggers {
+
+githubPush() // Trigger the pipeline when a push event occurs on the GitHub repository
+
+}
+
+9\.
+
+10\.
+
+11\.
+
+12\.
+
+13\.
+
+14\.
+
+15\.
+
+16\.
+
+17\.
+
+18\.
+
+19\.
+
+20\.
+
+21\.
+
+22\.
+
+23\.
+
+24\.
+
+25\.
+
+26\.
+
+27\.
+
+28\.
+
+29\.
+
+30\.
+
+31\.
+
+32\.
+
+33\.
+
+34\.
+
+35\.
+
+36\.
+
+37\.
+
+38\.
+
+39\.
+
+40\.
+
+41\.
+
+42\.
+
+stages {
+
+stage('Checkout Git Repository') {
+
+steps {
+
+// Checkout the Git repository
+
+git 'https://github.com/rajujaat25/jenkins-cafe.git'
+
+}
+
+}
+
+stage ('Docker file build'){
+
+steps{
+
+sh 'docker build -t rajujaat25/cafenewimage:latest .'
+
+}
+
+}
+
+stage('login to dockerhub') {
+
+steps{
+
+sh "echo ${DOCKER\_PASSWORD} | docker login -u rajujaat25 --password-stdin"
+
+}
+
+}
+
+stage('push image') {
+
+steps{
+
+sh 'docker push rajujaat25/cafenewimage:latest'
+
+}
+
+}
+
+stage('Deploy to Kubernetes') {
+
+steps {
+
+script {
+
+withKubeConfig([credentialsId: 'eks', serverUrl: '']) {
+
+def yamlFiles = ['Deployment.yml','service.yml'] // Add more YAML file names as needed
+
+yamlFiles.each { yamlFile ->
+
+sh "kubectl apply -f $yamlFile"
+
+}
+
+}
+
+}
+
+}
+
+43\.
+
+44\.
+
+45\.
+
+46\.
+
+47\.
+
+}
+
+}
+
+}
+
