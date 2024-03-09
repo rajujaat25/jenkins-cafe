@@ -16,13 +16,9 @@ an Ubuntu EC2 instance.
 
 1\. sudo apt-get update
 
-2\. sudo wget -O /usr/share/keyrings/jenkins-keyring.asc https://pkg.jenkins.io/debian-stable/jenkins.io
+2\. sudo wget -O /usr/share/keyrings/jenkins-keyring.asc https://pkg.jenkins.io/debian-stable/jenkins.io-2023.key
 
--2023.key
-
-3\. echo deb [signed-by=/usr/share/keyrings/jenkins-keyring.asc] https://pkg.jenkins.io/debian-stable b
-
-inary/ | sudo tee /etc/apt/sources.list.d/jenkins.list > /dev/null
+3\. echo deb [signed-by=/usr/share/keyrings/jenkins-keyring.asc] https://pkg.jenkins.io/debian-stable binary/ | sudo tee /etc/apt/sources.list.d/jenkins.list > /dev/null
 
 4\. sudo apt-get update
 
@@ -48,9 +44,6 @@ plugins, including Git, Docker, and Kubernetes.
 
 
 
-
-Editor.md - Open source online Markdown editor.
-
 **AWS CLI Installation**
 
 1\. curl "https://awscli.amazonaws.com/awscli-exe-linux-x86\_64.zip" -o "awscliv2.zip"
@@ -65,9 +58,7 @@ Editor.md - Open source online Markdown editor.
 
 **eksctl Installation**
 
-1\. curl --silent --location "https://github.com/weaveworks/eksctl/releases/latest/download/eksctl\_$(un
-
-ame -s)\_amd64.tar.gz" | tar xz -C /tmp
+1\. curl --silent --location "https://github.com/weaveworks/eksctl/releases/latest/download/eksctl\_$(uname -s)\_amd64.tar.gz" | tar xz -C /tmp
 
 2\. sudo mv /tmp/eksctl /usr/local/bin
 
@@ -75,9 +66,7 @@ ame -s)\_amd64.tar.gz" | tar xz -C /tmp
 
 **kubectl Installation**
 
-1\. sudo curl --silent --location -o /usr/local/bin/kubectl https://s3.us-west-2.amazonaws.com/amazon-
-
-eks/1.22.6/2022-03-09/bin/linux/amd64/kubectl
+1\. sudo curl --silent --location -o /usr/local/bin/kubectl https://s3.us-west-2.amazonaws.com/amazon-eks/1.22.6/2022-03-09/bin/linux/amd64/kubectl
 
 2\. sudo chmod +x /usr/local/bin/kubectl
 
@@ -85,10 +74,7 @@ eks/1.22.6/2022-03-09/bin/linux/amd64/kubectl
 
 **Create EKS Cluster**
 
-1\. eksctl create cluster --name <Cluster-Name> --region us-east-1 --nodegroup-name my-nodes --no
-
-de-type t3.small --managed --nodes 2
-
+1\. eksctl create cluster --name <Cluster-Name> --region us-east-1 --nodegroup-name my-nodes --node-type t3.small --managed --nodes 2
 Replace with the desired name for your EKS cluster.
 
 Now you have Jenkins, Docker, AWS CLI, eksctl, and kubectl installed and configured on your Ubuntu EC2
