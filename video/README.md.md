@@ -1,14 +1,6 @@
-﻿<a name="br1"></a> 
 
-3/9/24, 6:00 PM
 
-Editor.md - Open source online Markdown editor.
-
-**Setting Up Jenkins, Docker, AWS CLI,**
-
-**eksctl, and kubectl on Ubuntu EC2**
-
-**Instance**
+**Setting Up Jenkins, Docker, AWS CLI eksctl, and kubectl on Ubuntu EC2 Instance**
 
 This guide provides step-by-step instructions for setting up Jenkins, Docker, AWS CLI, eksctl, and kubectl on
 
