@@ -80,4 +80,29 @@ Replace with the desired name for your EKS cluster.
 
 Now you have Jenkins, Docker, AWS CLI, eksctl, and kubectl installed and configured on your Ubuntu EC2instance. You can proceed to use these tools for your development and deployment tasks.
 
+**Configure Kubernetes Credentials in**
+
+**Jenkins**
+
+1\. View kubeconfig file: Execute the following command to view the kubeconfig file:
+
+1\. #cat /var/lib/jenkins/.kube/config
+
+1\. Create Credentials: In Jenkins, go to Credentials, click on Add Credentials, and choose Kubernetes
+
+configuration. You can either use a secret file or enter the content directly.
+
+2\. Verify Connection: Switch to the Jenkins user:
+
+1\. #sudo su - jenkins
+
+Then, verify the connection to the EKS cluster:
+
+1\. #kubectl get nodes
+
+**Create Jenkins Pipeline**
+
+Create a New Pipeline Job: In Jenkins, create a new pipeline job to define your deployment pipeline. You can
+
+use the provided example pipeline code and customize it according to your requirements.
 
