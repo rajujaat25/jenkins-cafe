@@ -18,11 +18,11 @@ an Ubuntu EC2 instance.
 
 2\. #sudo wget -O /usr/share/keyrings/jenkins-keyring.asc https://pkg.jenkins.io/debian-stable/jenkins.io-2023.key
 
-3\. echo deb [signed-by=/usr/share/keyrings/jenkins-keyring.asc] https://pkg.jenkins.io/debian-stable binary/ | sudo tee /etc/apt/sources.list.d/jenkins.list > /dev/null
+3\. #echo deb [signed-by=/usr/share/keyrings/jenkins-keyring.asc] https://pkg.jenkins.io/debian-stable binary/ | sudo tee /etc/apt/sources.list.d/jenkins.list > /dev/null
 
-4\. sudo apt-get update
+4\. #sudo apt-get update
 
-5\. sudo apt-get install jenkins
+5\. #sudo apt-get install jenkins
 
 Configure Jenkins: Open Jenkins in a web browser and complete the initial configuration. Install required
 
@@ -30,51 +30,52 @@ plugins, including Git, Docker, and Kubernetes.
 
 **Docker Installation**
 
-1\. sudo apt install docker.io -y
+1\. #sudo apt install docker.io -y
 
-2\. sudo usermod -a -G docker jenkins
+2\. #sudo usermod -a -G docker jenkins
 
-3\. sudo service jenkins restart
+3\. #sudo service jenkins restart
 
-4\. sudo systemctl daemon-reload
+4\. #sudo systemctl daemon-reload
 
-5\. sudo service docker stop
+5\. #sudo service docker stop
 
-6\. sudo service docker start`
+6\. #sudo service docker start`
 
 
 
 **AWS CLI Installation**
 
-1\. curl "https://awscli.amazonaws.com/awscli-exe-linux-x86\_64.zip" -o "awscliv2.zip"
+1\. #curl "https://awscli.amazonaws.com/awscli-exe-linux-x86\_64.zip" -o "awscliv2.zip"
 
-2\. sudo apt install unzip
+2\. #sudo apt install unzip
 
-3\. sudo unzip awscliv2.zip
+3\. #sudo unzip awscliv2.zip
 
-4\. sudo ./aws/install
+4\. #sudo ./aws/install
 
-5\. aws --version
+5\. #aws --version
 
 **eksctl Installation**
 
-1\. curl --silent --location "https://github.com/weaveworks/eksctl/releases/latest/download/eksctl\_$(uname -s)\_amd64.tar.gz" | tar xz -C /tmp
+1\. #curl --silent --location "https://github.com/weaveworks/eksctl/releases/latest/download/eksctl\_$(uname -s)\_amd64.tar.gz" | tar xz -C /tmp
 
-2\. sudo mv /tmp/eksctl /usr/local/bin
+2\. #sudo mv /tmp/eksctl /usr/local/bin
 
-3\. eksctl version
+3\. #eksctl version
 
 **kubectl Installation**
 
-1\. sudo curl --silent --location -o /usr/local/bin/kubectl https://s3.us-west-2.amazonaws.com/amazon-eks/1.22.6/2022-03-09/bin/linux/amd64/kubectl
+1\. #sudo curl --silent --location -o /usr/local/bin/kubectl https://s3.us-west-2.amazonaws.com/amazon-eks/1.22.6/2022-03-09/bin/linux/amd64/kubectl
 
-2\. sudo chmod +x /usr/local/bin/kubectl
+2\. #sudo chmod +x /usr/local/bin/kubectl
 
-3\. kubectl version --short --client
+3\. #kubectl version --short --client
 
 **Create EKS Cluster**
 
-1\. eksctl create cluster --name <Cluster-Name> --region us-east-1 --nodegroup-name my-nodes --node-type t3.small --managed --nodes 2
+1\. #eksctl create cluster --name <Cluster-Name> --region us-east-1 --nodegroup-name my-nodes --node-type t3.small --managed --nodes 2
+
 Replace with the desired name for your EKS cluster.
 
 Now you have Jenkins, Docker, AWS CLI, eksctl, and kubectl installed and configured on your Ubuntu EC2instance. You can proceed to use these tools for your development and deployment tasks.
