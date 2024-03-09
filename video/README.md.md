@@ -77,8 +77,6 @@ plugins, including Git, Docker, and Kubernetes.
 1\. eksctl create cluster --name <Cluster-Name> --region us-east-1 --nodegroup-name my-nodes --node-type t3.small --managed --nodes 2
 Replace with the desired name for your EKS cluster.
 
-Now you have Jenkins, Docker, AWS CLI, eksctl, and kubectl installed and configured on your Ubuntu EC2
-
-instance. You can proceed to use these tools for your development and deployment tasks.
+Now you have Jenkins, Docker, AWS CLI, eksctl, and kubectl installed and configured on your Ubuntu EC2instance. You can proceed to use these tools for your development and deployment tasks.
 
 
