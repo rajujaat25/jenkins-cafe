@@ -46,7 +46,6 @@ plugins, including Git, Docker, and Kubernetes.
 
 6\. sudo service docker start`
 
-https://pandao.github.io/editor.md/en.html
 
 1/2
 
