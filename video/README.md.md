@@ -47,13 +47,7 @@ plugins, including Git, Docker, and Kubernetes.
 6\. sudo service docker start`
 
 
-1/2
 
-
-
-<a name="br2"></a> 
-
-3/9/24, 6:00 PM
 
 Editor.md - Open source online Markdown editor.
 
@@ -101,7 +95,4 @@ Now you have Jenkins, Docker, AWS CLI, eksctl, and kubectl installed and configu
 
 instance. You can proceed to use these tools for your development and deployment tasks.
 
-https://pandao.github.io/editor.md/en.html
-
-2/2
 
