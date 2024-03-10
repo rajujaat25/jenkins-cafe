@@ -153,6 +153,9 @@ This guide provides step-by-step instructions for creating an AWS Application Lo
 Create a New Pipeline Job: In Jenkins, create a new pipeline job to define your deployment pipeline. You can
 
 use the provided example pipeline code and customize it according to your requirements.
+
+##  Deployment Pipeline:
+
 ```groovy
 pipeline {
 
@@ -240,4 +243,21 @@ pipeline {
               }
 
            }
+# Deployment Process Overview
+
+In a real-world scenario where code changes need to be deployed, it's common to follow a two-step process:
+
+## Initial Deployment Pipeline:
+
+- This pipeline is triggered when there's a new version of the application or significant changes requiring a full deployment.
+- It typically involves stages such as pulling the code from the Git repository in Jenkins, building the Docker image, pushing the image to Docker Hub, and deploying the image to the Kubernetes cluster in the target environment.
+
+## Deployment Restart Pipeline:
+
+- This pipeline is triggered for subsequent code changes that don't necessitate a full redeployment but rather an update to the existing deployment.
+- It's designed to be more lightweight and faster than the initial deployment pipeline.
+- Stages in this pipeline might include pulling the latest changes from the version control system, building the updated artifacts, and deploying them to the target environment.
+
+These pipelines help streamline the deployment process, ensuring that new changes are deployed efficiently while minimizing downtime and maintaining system reliability. Automation and continuous integration practices play a crucial role in executing these pipelines reliably and consistently.
+
 
