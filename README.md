@@ -1,129 +1,284 @@
-ec2 instance ubuntu machine create
-role create and role police add administraccess
+
+
+**Setting Up Jenkins, Docker, AWS CLI eksctl, and kubectl on Ubuntu EC2 Instance**
+
+This guide provides step-by-step instructions for setting up Jenkins, Docker, AWS CLI, eksctl, and kubectl on
+
+an Ubuntu EC2 instance.
+
+**EC2 Instance Setup**
+
+1\. Create an Ubuntu EC2 Instance: Launch an Ubuntu EC2 instance on AWS.
+
+2\. SSH into the Instance: Use SSH to connect to your Ubuntu EC2 instance.
+
+## Add Administrator Role
+
+To add an administrator role in AWS IAM, follow these steps:
+
+1. **Navigate to IAM Dashboard**: From the services menu, select IAM to navigate to the IAM dashboard.
+
+2. **Create a New Role**: Click on "Roles" in the sidebar and then click on "Create role".
+
+3. **Select Role Type**: Choose "AWS service" as the trusted entity and select EC2 as the service that will use this role. Click "Next: Permissions".
+
+4. **Attach Administrator Policy**: In the permissions step, search for and select the "AdministratorAccess" policy. This policy grants full access to AWS services and resources.
+
+5. **Review and Create**: Review the role configuration and click "Next: Tags" if you want to add tags. Otherwise, click "Next: Review".
+
+6. **Name and Create Role**: Provide a name and description for the role and click "Create role" to create the role.
+
+Once the role is created, you can assign it to your EC2 instance during or after the instance launch process. This will give the EC2 instance the necessary permissions to perform administrative tasks within your AWS account.
+
+
+**Jenkins Installation**
+
+1\. #sudo hostname jenkins
+
+2\. #sudo apt-get update
+
+3\. #sudo wget -O /usr/share/keyrings/jenkins-keyring.asc https://pkg.jenkins.io/debian-stable/jenkins.io-2023.key
+
+4\. #echo deb [signed-by=/usr/share/keyrings/jenkins-keyring.asc] https://pkg.jenkins.io/debian-stable binary/ | sudo tee /etc/apt/sources.list.d/jenkins.list > /dev/null
+
+5\. #sudo apt-get update
+
+6\. #sudo apt-get install jenkins
+
+Configure Jenkins: Open Jenkins in a web browser and complete the initial configuration. Install required
+
+plugins, including Git, Docker, and Kubernetes.
+
+**Docker Installation**
+
+1\. #sudo apt install docker.io -y
+
+2\. #sudo usermod -a -G docker jenkins
+
+3\. #sudo service jenkins restart
+
+4\. #sudo systemctl daemon-reload
+
+5\. #sudo service docker stop
+
+6\. #sudo service docker start`
 
 
 
-set hostname jenkins
+**AWS CLI Installation**
 
-sudo apt-get  update
-jenkins installation
-sudo wget -O /usr/share/keyrings/jenkins-keyring.asc \
-  https://pkg.jenkins.io/debian-stable/jenkins.io-2023.key
-echo deb [signed-by=/usr/share/keyrings/jenkins-keyring.asc] \
-  https://pkg.jenkins.io/debian-stable binary/ | sudo tee \
-  /etc/apt/sources.list.d/jenkins.list > /dev/null
-sudo apt-get update
-sudo apt-get install jenkins
+1\. #curl "https://awscli.amazonaws.com/awscli-exe-linux-x86\_64.zip" -o "awscliv2.zip"
 
-jenkins configure and required pulgin install (Git, Docker, Kubernets)
+2\. #sudo apt install unzip
 
-docker installation
-Install docker
-sudo apt install docker.io -y
+3\. #sudo unzip awscliv2.zip
 
-Add jenkins user to Docker group
-sudo usermod -a -G docker jenkins
+4\. #sudo ./aws/install
 
-Restart Jenkins service
-sudo service jenkins restart
+5\. #aws --version
 
-Reload system daemon files
-sudo systemctl daemon-reload
+**eksctl Installation**
 
-Restart Docker service as well
+1\. #curl --silent --location "https://github.com/weaveworks/eksctl/releases/latest/download/eksctl\_$(uname -s)\_amd64.tar.gz" | tar xz -C /tmp
 
-sudo service docker stop
-sudo service docker start
+2\. #sudo mv /tmp/eksctl /usr/local/bin
 
-Install the AWS CLI version 2 on Linux 
-Follow these steps from the command line to install the AWS CLI on Linux.
+3\. #eksctl version
 
-curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip" 
+**kubectl Installation**
 
-sudo apt install unzip
+1\. #sudo curl --silent --location -o /usr/local/bin/kubectl https://s3.us-west-2.amazonaws.com/amazon-eks/1.22.6/2022-03-09/bin/linux/amd64/kubectl
 
-sudo unzip awscliv2.zip  
+2\. #sudo chmod +x /usr/local/bin/kubectl
 
-sudo ./aws/install
+3\. #kubectl version --short --client
 
-aws --version
+**Create EKS Cluster**
 
-Install eksctl on Ubuntu Instance
+1\. #eksctl create cluster --name (cluster-name) --node-type t2.micro --region us-east-2
 
-Download and extract the latest release of eksctl with the following command.
+Replace with the desired name for your EKS cluster.
 
-curl --silent --location "https://github.com/weaveworks/eksctl/releases/latest/download/eksctl_$(uname -s)_amd64.tar.gz" | tar xz -C /tmp
+Now you have Jenkins, Docker, AWS CLI, eksctl, and kubectl installed and configured on your Ubuntu EC2instance. You can proceed to use these tools for your development and deployment tasks.
 
-Move the extracted binary to /usr/local/bin. 
+**Configure Kubernetes Credentials in**
 
-sudo mv /tmp/eksctl /usr/local/bin
+**Jenkins**
 
-eksctl version
+1\. View kubeconfig file: Execute the following command to view the kubeconfig file:
 
-Install kubectl on Ubuntu Instance 
-Download and extract the latest release of kubectl with the following command.
-sudo curl --silent --location -o /usr/local/bin/kubectl   https://s3.us-west-2.amazonaws.com/amazon-eks/1.22.6/2022-03-09/bin/linux/amd64/kubectl
+1\. #cat /var/lib/jenkins/.kube/config
 
+2\. Create Credentials: In Jenkins, go to Credentials, click on Add Credentials, and choose Kubernetes
 
+configuration. You can either use a secret file or enter the content directly.
 
-sudo chmod +x /usr/local/bin/kubectl 
+3\. Verify Connection: Switch to the Jenkins user:
 
+1\. #sudo su - jenkins
 
-Verify if kubectl got installed
-kubectl version --short --client
+Then, verify the connection to the EKS cluster:
 
-Create EKS Cluster with two worker nodes using eksctl
+1\. #kubectl get nodes
 
-eksctl create cluster --name <Cluster-Name> --region us-east-1 --nodegroup-name my-nodes --node-type t3.small --managed --nodes 2
+#  Setting Up AWS Application Load Balancer and Integrating with EKS Cluster
 
-kubeconfig file be updated under /var/lib/jenkins/.kube folder.
+This guide provides step-by-step instructions for creating an AWS Application Load Balancer and integrating it with your EKS cluster.
 
-you can view the kubeconfig file by entering the below command:
+## Prerequisites
 
-cat  /var/lib/jenkins/.kube/config
+- AWS account with permissions to create resources like EC2, Load Balancer, and EKS.
+- Existing EKS cluster.
 
- Install kubectl on your instance
+## Create AWS Application Load Balancer
+
+1. **Navigate to EC2 Dashboard**: Go to the AWS Management Console, navigate to the EC2 Dashboard.
+
+2. **Create Load Balancer**: Click on "Load Balancers" in the sidebar and then click "Create Load Balancer".
+
+3. **Choose Load Balancer Type**: Select "Application Load Balancer" and click "Create".
+
+4. **Configure Load Balancer**: Configure the load balancer settings, including listeners, availability zones, security settings, and tags.
+
+5. **Register Targets**: Register your EKS worker nodes as targets for the load balancer.
+
+6. **Review and Create**: Review the configuration and click "Create" to create the load balancer.
+
+## Integrate Load Balancer with EKS Cluster
+
+1. **Update Kubernetes Service**: Update your Kubernetes service configuration to use the AWS Application Load Balancer.
+
+# Create Jenkins Pipeline
+
+Create a New Pipeline Job: In Jenkins, create a new pipeline job to define your deployment pipeline. You can
+
+use the provided example pipeline code and customize it according to your requirements.
+
+##  Deployment Pipeline:
+
+```groovy
+pipeline {
+
+   agent any
+
+          environment {
+
+                DOCKER\_PASSWORD = credentials('Docker-Password') // Assuming you've added Docker Hub password as a secret text credential with ID 'dockerhub-password'
+
+                       }
+          triggers {
+
+          githubPush() // Trigger the pipeline when a push event occurs on the GitHub repository
+
+                   }
+
+          stages {
+
+            stage('Checkout Git Repository') {
+
+              steps {
+
+                  // Checkout the Git repository
+
+                  git 'https://github.com/rajujaat25/jenkins-cafe.git'
+
+                    }
+
+                }
  
+          stage ('Docker file build'){
 
+             steps{
 
-Create Credentials for connecting to Kubernetes Cluster using kubeconfig
-Click on Add Credentials, use Kubernetes configuration from drop down.
+          sh 'docker build -t rajujaat25/cafenewimage:latest .'
 
-image
+                  }
 
+              }
 
-use secret file from drop down.
+         stage('login to dockerhub') {
 
-image
+            steps{
 
+         sh "echo ${DOCKER\_PASSWORD} | docker login -u Docker_UserName --password-stdin"
 
+                 }
 
-execute the below command to login as jenkins user.
-sudo su - jenkins
+              }
 
-you should see the nodes running in EKS cluster.
+        stage('push image') {
 
-kubectl get nodes
-image
+           steps{
 
+        sh 'docker push rajujaat25/cafenewimage:latest'
 
+                }
 
-Execute the below command to get kubeconfig info, copy the entire content of the file:
-cat /var/lib/jenkins/.kube/config
+           }
 
-iamge
+       stage('Deploy to Kubernetes') {
 
-Open your text editor or notepad, copy and paste the entire content and save in a file.
-We will upload this file.
+           steps {
 
+              script {
 
-Enter ID as K8S and choose File and upload the file and save.
+                   withKubeConfig([credentialsId: 'eks', serverUrl: '']) {
 
-image
+                   def yamlFiles = ['Deployment.yml','service.yml'] // Add more YAML file names as needed
 
-Enter ID as K8S and choose enter directly and paste the above file content and save.
+                   yamlFiles.each { yamlFile ->
 
-Create a pipeline in Jenkins
-Create a new pipeline job.
+                   sh "kubectl apply -f $yamlFile"
+
+                                  }
+
+                              }
+
+                          }
+
+                     }
+
+                 }
+
+              }
+
+           }
+```
+
+# Deployment Process Overview
+
+In a real-world scenario where code changes need to be deployed, it's common to follow a two-step process:
+
+## Initial Deployment Pipeline:
+
+- This pipeline is triggered when there's a new version of the application or significant changes requiring a full deployment.
+- It typically involves stages such as pulling the code from the Git repository in Jenkins, building the Docker image, pushing the image to Docker Hub, and deploying the image to the Kubernetes cluster in the target environment.
+
+## Deployment Restart Pipeline:
+
+- This pipeline is triggered for subsequent code changes that don't necessitate a full redeployment but rather an update to the existing deployment.
+- It's designed to be more lightweight and faster than the initial deployment pipeline.
+- Stages in this pipeline might include pulling the latest changes from the version control system, building the updated artifacts, and deploying them to the target environment.
+
+## Restart Deployment Pipeline
+
+```groovy
+pipeline {
+     agent any
+       environment {
+          // Reference the secret file credential by its ID
+          KUBECONFIG_FILE = credentials('eks')
+           }
+    
+      stages {
+          stage('Restart Deployment') {
+              steps {
+                     sh "kubectl rollout restart deployment.apps/mydeploy --kubeconfig=${KUBECONFIG_FILE}"
+                   }
+               }
+           }
+     }
+```
+These pipelines help streamline the deployment process, ensuring that new changes are deployed efficiently while minimizing downtime and maintaining system reliability. Automation and continuous integration practices play a crucial role in executing these pipelines reliably and consistently.
 
 
