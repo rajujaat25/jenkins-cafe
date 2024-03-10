@@ -129,7 +129,7 @@ This guide provides step-by-step instructions for creating an AWS Application Lo
 
 1. **Update Kubernetes Service**: Update your Kubernetes service configuration to use the AWS Application Load Balancer.
 
-**Create Jenkins Pipeline**
+# Create Jenkins Pipeline
 
 Create a New Pipeline Job: In Jenkins, create a new pipeline job to define your deployment pipeline. You can
 
