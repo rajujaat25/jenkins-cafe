@@ -113,7 +113,7 @@ pipeline {
           environment {
 
                 DOCKER\_PASSWORD = credentials('Docker-Password') // 'Assuming you've added Docker Hub password as a secret 
-                text credential with ID 'dockerhub-password'
+text credential with ID 'dockerhub-password'
 
                        }
           triggers {
