@@ -260,6 +260,25 @@ In a real-world scenario where code changes need to be deployed, it's common to 
 - It's designed to be more lightweight and faster than the initial deployment pipeline.
 - Stages in this pipeline might include pulling the latest changes from the version control system, building the updated artifacts, and deploying them to the target environment.
 
+## Restart Deployment Pipeline
+
+```groovy
+pipeline {
+     agent any
+       environment {
+          // Reference the secret file credential by its ID
+          KUBECONFIG_FILE = credentials('eks')
+           }
+    
+      stages {
+          stage('Restart Deployment') {
+              steps {
+                     sh "kubectl rollout restart deployment.apps/mydeploy --kubeconfig=${KUBECONFIG_FILE}"
+                   }
+               }
+           }
+     }
+```
 These pipelines help streamline the deployment process, ensuring that new changes are deployed efficiently while minimizing downtime and maintaining system reliability. Automation and continuous integration practices play a crucial role in executing these pipelines reliably and consistently.
 
 
