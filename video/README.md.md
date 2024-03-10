@@ -108,97 +108,89 @@ use the provided example pipeline code and customize it according to your requir
 
 1\. pipeline {
 
-2\.
+      agent any
 
-3\.
+          environment {
 
-4\.
+                DOCKER\_PASSWORD = credentials('Docker-Password') // Assuming you've added Docker Hub password as a secret 
+                text credential with ID 'dockerhub-password'
 
-agent any
+                       }
+          triggers {
 
-environment {
+          githubPush() // Trigger the pipeline when a push event occurs on the GitHub repository
 
-DOCKER\_PASSWORD = credentials('Docker-Password') // Assuming you've added Docker Hub
+                   }
 
-password as a secret text credential with ID 'dockerhub-password'
+          stages {
 
-}
+            stage('Checkout Git Repository') {
 
-triggers {
+              steps {
 
-githubPush() // Trigger the pipeline when a push event occurs on the GitHub repository
+                  // Checkout the Git repository
 
-}
+                  git 'https://github.com/rajujaat25/jenkins-cafe.git'
 
-stages {
+                    }
 
-stage('Checkout Git Repository') {
+                }
+ 
+          stage ('Docker file build'){
 
-steps {
+             steps{
 
-// Checkout the Git repository
+          sh 'docker build -t rajujaat25/cafenewimage:latest .'
 
-git 'https://github.com/rajujaat25/jenkins-cafe.git'
+                  }
 
-}
+              }
 
-}
+         stage('login to dockerhub') {
 
-stage ('Docker file build'){
+            steps{
 
-steps{
+         sh "echo ${DOCKER\_PASSWORD} | docker login -u rajujaat25 --password-stdin"
 
-sh 'docker build -t rajujaat25/cafenewimage:latest .'
+                 }
 
-}
+              }
 
-}
+        stage('push image') {
 
-stage('login to dockerhub') {
+           steps{
 
-steps{
+        sh 'docker push rajujaat25/cafenewimage:latest'
 
-sh "echo ${DOCKER\_PASSWORD} | docker login -u rajujaat25 --password-stdin"
+                }
 
-}
+           }
 
-}
+       stage('Deploy to Kubernetes') {
 
-stage('push image') {
+           steps {
 
-steps{
+              script {
 
-sh 'docker push rajujaat25/cafenewimage:latest'
+                   withKubeConfig([credentialsId: 'eks', serverUrl: '']) {
 
-}
+                   def yamlFiles = ['Deployment.yml','service.yml'] // Add more YAML file names as needed
 
-}
+                   yamlFiles.each { yamlFile ->
 
-stage('Deploy to Kubernetes') {
+                   sh "kubectl apply -f $yamlFile"
 
-steps {
+                                  }
 
-script {
+                              }
 
-withKubeConfig([credentialsId: 'eks', serverUrl: '']) {
+                          }
 
-def yamlFiles = ['Deployment.yml','service.yml'] // Add more YAML file names as needed
+                     }
 
-yamlFiles.each { yamlFile ->
+                 }
 
-sh "kubectl apply -f $yamlFile"
+              }
 
-}
-
-}
-
-}
-
-}
-
-}
-
-}
-
-}
+           }
 
