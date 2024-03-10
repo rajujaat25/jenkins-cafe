@@ -108,8 +108,7 @@ use the provided example pipeline code and customize it according to your requir
 ```groovy
 pipeline {
 
-  agent any
-```
+   agent any
 
           environment {
 
