@@ -150,7 +150,7 @@ pipeline {
 
             steps{
 
-         sh "echo ${DOCKER\_PASSWORD} | docker login -u rajujaat25 --password-stdin"
+         sh "echo ${DOCKER\_PASSWORD} | docker login -u Docker_UserName --password-stdin"
 
                  }
 
