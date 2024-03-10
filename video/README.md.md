@@ -105,10 +105,11 @@ Then, verify the connection to the EKS cluster:
 Create a New Pipeline Job: In Jenkins, create a new pipeline job to define your deployment pipeline. You can
 
 use the provided example pipeline code and customize it according to your requirements.
+```groovy
+pipeline {
 
- pipeline {
-
-      agent any
+  agent any
+```
 
           environment {
 
