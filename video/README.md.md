@@ -76,7 +76,7 @@ plugins, including Git, Docker, and Kubernetes.
 
 **Create EKS Cluster**
 
-1\. #eksctl create cluster --name <cluster-name> --node-type t2.micro --region us-east-2
+1\. #eksctl create cluster --name (cluster-name) --node-type t2.micro --region us-east-2
 
 Replace with the desired name for your EKS cluster.
 
