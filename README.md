@@ -37,13 +37,15 @@ Once the role is created, you can assign it to your EC2 instance during or after
 
 2\. #sudo apt-get update
 
-3\. #sudo wget -O /usr/share/keyrings/jenkins-keyring.asc https://pkg.jenkins.io/debian-stable/jenkins.io-2023.key
+3\. sudo apt install openjdk-11-jre-headless
 
-4\. #echo deb [signed-by=/usr/share/keyrings/jenkins-keyring.asc] https://pkg.jenkins.io/debian-stable binary/ | sudo tee /etc/apt/sources.list.d/jenkins.list > /dev/null
+4\. #sudo wget -O /usr/share/keyrings/jenkins-keyring.asc https://pkg.jenkins.io/debian-stable/jenkins.io-2023.key
 
-5\. #sudo apt-get update
+5\. #echo deb [signed-by=/usr/share/keyrings/jenkins-keyring.asc] https://pkg.jenkins.io/debian-stable binary/ | sudo tee /etc/apt/sources.list.d/jenkins.list > /dev/null
 
-6\. #sudo apt-get install jenkins
+6\. #sudo apt-get update
+
+7\. #sudo apt-get install jenkins
 
 Configure Jenkins: Open Jenkins in a web browser and complete the initial configuration. Install required
 
