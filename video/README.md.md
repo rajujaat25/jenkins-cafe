@@ -13,7 +13,7 @@ an Ubuntu EC2 instance.
 2\. SSH into the Instance: Use SSH to connect to your Ubuntu EC2 instance.
 
 **Jenkins Installation**
-
+```groovy
 1\. #sudo apt-get update
 
 2\. #sudo wget -O /usr/share/keyrings/jenkins-keyring.asc https://pkg.jenkins.io/debian-stable/jenkins.io-2023.key
@@ -23,7 +23,7 @@ an Ubuntu EC2 instance.
 4\. #sudo apt-get update
 
 5\. #sudo apt-get install jenkins
-
+```
 Configure Jenkins: Open Jenkins in a web browser and complete the initial configuration. Install required
 
 plugins, including Git, Docker, and Kubernetes.
