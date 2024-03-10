@@ -106,7 +106,7 @@ Create a New Pipeline Job: In Jenkins, create a new pipeline job to define your 
 
 use the provided example pipeline code and customize it according to your requirements.
 
-1\. pipeline {
+ pipeline {
 
       agent any
 
