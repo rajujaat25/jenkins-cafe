@@ -12,6 +12,25 @@ an Ubuntu EC2 instance.
 
 2\. SSH into the Instance: Use SSH to connect to your Ubuntu EC2 instance.
 
+## Add Administrator Role
+
+To add an administrator role in AWS IAM, follow these steps:
+
+1. **Navigate to IAM Dashboard**: From the services menu, select IAM to navigate to the IAM dashboard.
+
+2. **Create a New Role**: Click on "Roles" in the sidebar and then click on "Create role".
+
+3. **Select Role Type**: Choose "AWS service" as the trusted entity and select EC2 as the service that will use this role. Click "Next: Permissions".
+
+4. **Attach Administrator Policy**: In the permissions step, search for and select the "AdministratorAccess" policy. This policy grants full access to AWS services and resources.
+
+5. **Review and Create**: Review the role configuration and click "Next: Tags" if you want to add tags. Otherwise, click "Next: Review".
+
+6. **Name and Create Role**: Provide a name and description for the role and click "Create role" to create the role.
+
+Once the role is created, you can assign it to your EC2 instance during or after the instance launch process. This will give the EC2 instance the necessary permissions to perform administrative tasks within your AWS account.
+
+
 **Jenkins Installation**
 
 1\. #sudo hostname jenkins
