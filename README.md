@@ -1,6 +1,6 @@
 
 
-# Setting Up Jenkins, Docker, AWS CLI eksctl, and kubectl on Ubuntu EC2 Instance
+# DevOps Project: Setting Up Jenkins, Docker, AWS CLI eksctl, and kubectl on Ubuntu EC2 Instance
 
 This guide provides step-by-step instructions for setting up Jenkins, Docker, AWS CLI, eksctl, and kubectl on
 
