@@ -81,7 +81,7 @@ plugins, including Git, Docker, and Kubernetes.
 
 **eksctl Installation**
 
-1\. #curl --silent --location "https://github.com/weaveworks/eksctl/releases/latest/download/eksctl\_$(uname -s)\_amd64.tar.gz" | tar xz -C /tmp
+1\. #sudo curl --silent --location "https://github.com/weaveworks/eksctl/releases/latest/download/eksctl_$(uname -s)_amd64.tar.gz" | sudo tar xz -C /tmp
 
 2\. #sudo mv /tmp/eksctl /usr/local/bin
 
