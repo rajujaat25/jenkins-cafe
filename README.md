@@ -109,7 +109,7 @@ Now you have Jenkins, Docker, AWS CLI, eksctl, and kubectl installed and configu
 
 1\. View kubeconfig file: Execute the following command to view the kubeconfig file:
 
-1\. #cat /var/lib/jenkins/.kube/config
+1\. #cat /home/ubuntu/.kube/config
 
 2\. Create Credentials: In Jenkins, go to Credentials, click on Add Credentials, and choose Kubernetes
 
