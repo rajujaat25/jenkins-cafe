@@ -69,11 +69,11 @@ plugins, including Git, Docker, and Kubernetes.
 
 **AWS CLI Installation**
 
-1\. #curl "https://awscli.amazonaws.com/awscli-exe-linux-x86\_64.zip" -o "awscliv2.zip"
+1\. #curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
 
 2\. #sudo apt install unzip
 
-3\. #sudo unzip awscliv2.zip
+3\. #unzip awscliv2.zip
 
 4\. #sudo ./aws/install
 
