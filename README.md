@@ -33,19 +33,17 @@ Once the role is created, you can assign it to your EC2 instance during or after
 
 **Jenkins Installation**
 
-1\. #sudo hostname jenkins
+1\. #sudo apt-get update
 
-2\. #sudo apt-get update
+2\. #sudo apt install openjdk-11-jre-headless
 
-3\. #sudo apt install openjdk-11-jre-headless
+3\. #sudo wget -O /usr/share/keyrings/jenkins-keyring.asc https://pkg.jenkins.io/debian-stable/jenkins.io-2023.key
 
-4\. #sudo wget -O /usr/share/keyrings/jenkins-keyring.asc https://pkg.jenkins.io/debian-stable/jenkins.io-2023.key
+4\. #echo deb [signed-by=/usr/share/keyrings/jenkins-keyring.asc] https://pkg.jenkins.io/debian-stable binary/ | sudo tee /etc/apt/sources.list.d/jenkins.list > /dev/null
 
-5\. #echo deb [signed-by=/usr/share/keyrings/jenkins-keyring.asc] https://pkg.jenkins.io/debian-stable binary/ | sudo tee /etc/apt/sources.list.d/jenkins.list > /dev/null
+5\. #sudo apt-get update
 
-6\. #sudo apt-get update
-
-7\. #sudo apt-get install jenkins
+6\. #sudo apt-get install jenkins
 
 Configure Jenkins: Open Jenkins in a web browser and complete the initial configuration. Install required
 
@@ -114,10 +112,6 @@ Now you have Jenkins, Docker, AWS CLI, eksctl, and kubectl installed and configu
 2\. Create Credentials: In Jenkins, go to Credentials, click on Add Credentials, and choose Kubernetes
 
 configuration. You can either use a secret file or enter the content directly.
-
-3\. Verify Connection: Switch to the Jenkins user:
-
-1\. #sudo su - jenkins
 
 Then, verify the connection to the EKS cluster:
 
