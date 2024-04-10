@@ -47,7 +47,7 @@ Once the role is created, you can assign it to your EC2 instance during or after
 
 Configure Jenkins: Open Jenkins in a web browser and complete the initial configuration. Install required
 
-plugins, including Git, Docker, and Kubernetes.
+plugins, including Git, and Kubernetes(Kubernetes Credentials, Kubernetes CLI,Kubernetes Pipeline, Kubernetes Credentials Provider ).
 
 **Docker Installation**
 
