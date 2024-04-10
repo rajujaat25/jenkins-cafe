@@ -117,33 +117,6 @@ Then, verify the connection to the EKS cluster:
 
 1\. #kubectl get nodes
 
-#  Setting Up AWS Application Load Balancer and Integrating with EKS Cluster
-
-This guide provides step-by-step instructions for creating an AWS Application Load Balancer and integrating it with your EKS cluster.
-
-## Prerequisites
-
-- AWS account with permissions to create resources like EC2, Load Balancer, and EKS.
-- Existing EKS cluster.
-
-## Create AWS Application Load Balancer
-
-1. **Navigate to EC2 Dashboard**: Go to the AWS Management Console, navigate to the EC2 Dashboard.
-
-2. **Create Load Balancer**: Click on "Load Balancers" in the sidebar and then click "Create Load Balancer".
-
-3. **Choose Load Balancer Type**: Select "Application Load Balancer" and click "Create".
-
-4. **Configure Load Balancer**: Configure the load balancer settings, including listeners, availability zones, security settings, and tags.
-
-5. **Register Targets**: Register your EKS worker nodes as targets for the load balancer.
-
-6. **Review and Create**: Review the configuration and click "Create" to create the load balancer.
-
-## Integrate Load Balancer with EKS Cluster
-
-1. **Update Kubernetes Service**: Update your Kubernetes service configuration to use the AWS Application Load Balancer.
-
 # Create Jenkins Pipeline
 
 Create a New Pipeline Job: In Jenkins, create a new pipeline job to define your deployment pipeline. You can
