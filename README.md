@@ -159,7 +159,7 @@ pipeline {
 
           environment {
 
-                DOCKER\_PASSWORD = credentials('Docker-Password') // Assuming you've added Docker Hub password as a secret text credential with ID 'dockerhub-password'
+                DOCKER_PASSWORD = credentials('Docker-Password') // Assuming you've added Docker Hub password as a secret text credential with ID 'dockerhub-password'
 
                        }
           triggers {
@@ -196,7 +196,7 @@ pipeline {
 
             steps{
 
-         sh "echo ${DOCKER\_PASSWORD} | docker login -u Docker_UserName --password-stdin"
+         sh "echo ${DOCKER_PASSWORD} | docker login -u Docker_UserName --password-stdin"
 
                  }
 
