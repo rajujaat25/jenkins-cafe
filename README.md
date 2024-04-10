@@ -43,7 +43,7 @@ Once the role is created, you can assign it to your EC2 instance during or after
 
 5\. #sudo apt-get update
 
-6\. #sudo apt-get install jenkins
+6\. #sudo apt-get install jenkins -y
 
 Configure Jenkins: Open Jenkins in a web browser and complete the initial configuration. Install required
 
